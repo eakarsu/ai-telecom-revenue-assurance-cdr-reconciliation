@@ -1,0 +1,1305 @@
+{
+  "id": "ai-telecom-revenue-assurance-cdr-reconciliation",
+  "title": "Telecom Revenue Assurance Fabric",
+  "tagline": "Usage-to-cash reconciliation, billing leakage detection, and settlement assurance",
+  "industry": "Telecommunications Finance Operations",
+  "port": 4517,
+  "accent": "#0f766e",
+  "valueLabel": "Leakage detected",
+  "value": "$6.2M",
+  "workflows": [
+    {
+      "id": "cdr",
+      "title": "CDR Reconciliation",
+      "description": "Reconcile network events through mediation, rating, billing, and invoicing.",
+      "fields": [
+        {
+          "key": "networkElement",
+          "label": "Network Element",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "period",
+          "label": "Usage Period",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "sourceEvents",
+          "label": "Source Events",
+          "type": "number",
+          "required": true
+        },
+        {
+          "key": "billedEvents",
+          "label": "Billed Events",
+          "type": "number",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "networkElement": "Network Element STD-2026-104",
+            "period": "Usage Period STD-2026-104",
+            "sourceEvents": 125,
+            "billedEvents": 125
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "networkElement": "Network Element RISK-2026-227",
+            "period": "Usage Period RISK-2026-227",
+            "sourceEvents": 975,
+            "billedEvents": 975
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "networkElement": "Network Element EXC-2026-319",
+            "period": "Usage Period EXC-2026-319",
+            "sourceEvents": 41,
+            "billedEvents": 41
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "rating",
+      "title": "Rating Accuracy Review",
+      "description": "Validate tariffs, bundles, discounts, effective dates, and rounding.",
+      "fields": [
+        {
+          "key": "product",
+          "label": "Product / Tariff",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "subscriberSegment",
+          "label": "Subscriber Segment",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "expectedCharge",
+          "label": "Expected Charge",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "actualCharge",
+          "label": "Actual Charge",
+          "type": "currency",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "product": "Product / Tariff STD-2026-104",
+            "subscriberSegment": "Subscriber Segment STD-2026-104",
+            "expectedCharge": 285000,
+            "actualCharge": 285000
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "product": "Product / Tariff RISK-2026-227",
+            "subscriberSegment": "Subscriber Segment RISK-2026-227",
+            "expectedCharge": 875000,
+            "actualCharge": 875000
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "product": "Product / Tariff EXC-2026-319",
+            "subscriberSegment": "Subscriber Segment EXC-2026-319",
+            "expectedCharge": 142500,
+            "actualCharge": 142500
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "roaming",
+      "title": "Roaming Settlement Assurance",
+      "description": "Reconcile TAP/RAP, wholesale rates, partner invoices, and disputes.",
+      "fields": [
+        {
+          "key": "partner",
+          "label": "Roaming Partner",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "settlementPeriod",
+          "label": "Settlement Period",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "partnerInvoice",
+          "label": "Partner Invoice",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "calculatedAmount",
+          "label": "Calculated Amount",
+          "type": "currency",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "partner": "Roaming Partner STD-2026-104",
+            "settlementPeriod": "Settlement Period STD-2026-104",
+            "partnerInvoice": 285000,
+            "calculatedAmount": 285000
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "partner": "Roaming Partner RISK-2026-227",
+            "settlementPeriod": "Settlement Period RISK-2026-227",
+            "partnerInvoice": 875000,
+            "calculatedAmount": 875000
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "partner": "Roaming Partner EXC-2026-319",
+            "settlementPeriod": "Settlement Period EXC-2026-319",
+            "partnerInvoice": 142500,
+            "calculatedAmount": 142500
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "interconnect",
+      "title": "Interconnect Reconciliation",
+      "description": "Validate traffic, rates, routing, and carrier settlement invoices.",
+      "fields": [
+        {
+          "key": "carrier",
+          "label": "Carrier",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "route",
+          "label": "Route",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "minutes",
+          "label": "Minutes",
+          "type": "number",
+          "required": true
+        },
+        {
+          "key": "settlementVariance",
+          "label": "Settlement Variance",
+          "type": "currency",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "carrier": "Carrier STD-2026-104",
+            "route": "Route STD-2026-104",
+            "minutes": 125,
+            "settlementVariance": 285000
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "carrier": "Carrier RISK-2026-227",
+            "route": "Route RISK-2026-227",
+            "minutes": 975,
+            "settlementVariance": 875000
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "carrier": "Carrier EXC-2026-319",
+            "route": "Route EXC-2026-319",
+            "minutes": 41,
+            "settlementVariance": 142500
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "order-bill",
+      "title": "Order-to-Bill Assurance",
+      "description": "Find activated services that are missing, delayed, or incorrect in billing.",
+      "fields": [
+        {
+          "key": "serviceOrder",
+          "label": "Service Order",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "activationDate",
+          "label": "Activation Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "key": "billingStatus",
+          "label": "Billing Status",
+          "type": "select",
+          "required": true,
+          "options": [
+            "Not billed",
+            "Late",
+            "Incorrect",
+            "Correct"
+          ]
+        },
+        {
+          "key": "monthlyCharge",
+          "label": "Monthly Charge",
+          "type": "currency",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "serviceOrder": "Service Order STD-2026-104",
+            "activationDate": "2026-09-08",
+            "billingStatus": "Incorrect",
+            "monthlyCharge": 285000
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "serviceOrder": "Service Order RISK-2026-227",
+            "activationDate": "2026-08-19",
+            "billingStatus": "Not billed",
+            "monthlyCharge": 875000
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "serviceOrder": "Service Order EXC-2026-319",
+            "activationDate": "2026-08-10",
+            "billingStatus": "Incorrect",
+            "monthlyCharge": 142500
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "discount",
+      "title": "Discount Leakage Review",
+      "description": "Detect expired, overlapping, unauthorized, and misapplied discounts.",
+      "fields": [
+        {
+          "key": "account",
+          "label": "Account",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "discount",
+          "label": "Discount",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "discountValue",
+          "label": "Discount Value",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "issue",
+          "label": "Observed Issue",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "account": "Account STD-2026-104",
+            "discount": "Discount STD-2026-104",
+            "discountValue": 285000,
+            "issue": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "account": "Account RISK-2026-227",
+            "discount": "Discount RISK-2026-227",
+            "discountValue": 875000,
+            "issue": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "account": "Account EXC-2026-319",
+            "discount": "Discount EXC-2026-319",
+            "discountValue": 142500,
+            "issue": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "collections",
+      "title": "Unbilled and Aged Revenue",
+      "description": "Prioritize unbilled usage, bill holds, credit balances, and aged receivables.",
+      "fields": [
+        {
+          "key": "account",
+          "label": "Account",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "revenueType",
+          "label": "Revenue Type",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "amount",
+          "label": "Amount",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "agingBucket",
+          "label": "Aging Bucket",
+          "type": "select",
+          "required": false,
+          "options": [
+            "Current",
+            "31-60",
+            "61-90",
+            "90+"
+          ]
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "account": "Account STD-2026-104",
+            "revenueType": "Revenue Type STD-2026-104",
+            "amount": 285000,
+            "agingBucket": "90+"
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "account": "Account RISK-2026-227",
+            "revenueType": "Revenue Type RISK-2026-227",
+            "amount": 875000,
+            "agingBucket": "90+"
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "account": "Account EXC-2026-319",
+            "revenueType": "Revenue Type EXC-2026-319",
+            "amount": 142500,
+            "agingBucket": "90+"
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "leakage",
+      "title": "Leakage Recovery Case",
+      "description": "Manage root cause, financial validation, correction, recovery, and prevention.",
+      "fields": [
+        {
+          "key": "caseId",
+          "label": "Case ID",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "leakageType",
+          "label": "Leakage Type",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "estimatedValue",
+          "label": "Estimated Value",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "rootCause",
+          "label": "Root Cause",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "caseId": "Case ID STD-2026-104",
+            "leakageType": "Leakage Type STD-2026-104",
+            "estimatedValue": 285000,
+            "rootCause": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "caseId": "Case ID RISK-2026-227",
+            "leakageType": "Leakage Type RISK-2026-227",
+            "estimatedValue": 875000,
+            "rootCause": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "caseId": "Case ID EXC-2026-319",
+            "leakageType": "Leakage Type EXC-2026-319",
+            "estimatedValue": 142500,
+            "rootCause": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "id": "cdr",
+      "title": "CDR Reconciliation Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for cdr reconciliation.",
+      "table": "op_cdr",
+      "columns": [
+        {
+          "key": "networkElement",
+          "label": "Network Element",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_networkElement"
+        },
+        {
+          "key": "period",
+          "label": "Usage Period",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_period"
+        },
+        {
+          "key": "sourceEvents",
+          "label": "Source Events",
+          "type": "number",
+          "required": true,
+          "dbKey": "data_sourceEvents"
+        },
+        {
+          "key": "billedEvents",
+          "label": "Billed Events",
+          "type": "number",
+          "required": false,
+          "dbKey": "data_billedEvents"
+        }
+      ]
+    },
+    {
+      "id": "rating",
+      "title": "Rating Accuracy Review Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for rating accuracy review.",
+      "table": "op_rating",
+      "columns": [
+        {
+          "key": "product",
+          "label": "Product / Tariff",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_product"
+        },
+        {
+          "key": "subscriberSegment",
+          "label": "Subscriber Segment",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_subscriberSegment"
+        },
+        {
+          "key": "expectedCharge",
+          "label": "Expected Charge",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_expectedCharge"
+        },
+        {
+          "key": "actualCharge",
+          "label": "Actual Charge",
+          "type": "currency",
+          "required": false,
+          "dbKey": "data_actualCharge"
+        }
+      ]
+    },
+    {
+      "id": "roaming",
+      "title": "Roaming Settlement Assurance Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for roaming settlement assurance.",
+      "table": "op_roaming",
+      "columns": [
+        {
+          "key": "partner",
+          "label": "Roaming Partner",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_partner"
+        },
+        {
+          "key": "settlementPeriod",
+          "label": "Settlement Period",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_settlementPeriod"
+        },
+        {
+          "key": "partnerInvoice",
+          "label": "Partner Invoice",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_partnerInvoice"
+        },
+        {
+          "key": "calculatedAmount",
+          "label": "Calculated Amount",
+          "type": "currency",
+          "required": false,
+          "dbKey": "data_calculatedAmount"
+        }
+      ]
+    },
+    {
+      "id": "interconnect",
+      "title": "Interconnect Reconciliation Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for interconnect reconciliation.",
+      "table": "op_interconnect",
+      "columns": [
+        {
+          "key": "carrier",
+          "label": "Carrier",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_carrier"
+        },
+        {
+          "key": "route",
+          "label": "Route",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_route"
+        },
+        {
+          "key": "minutes",
+          "label": "Minutes",
+          "type": "number",
+          "required": true,
+          "dbKey": "data_minutes"
+        },
+        {
+          "key": "settlementVariance",
+          "label": "Settlement Variance",
+          "type": "currency",
+          "required": false,
+          "dbKey": "data_settlementVariance"
+        }
+      ]
+    },
+    {
+      "id": "order-bill",
+      "title": "Order-to-Bill Assurance Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for order-to-bill assurance.",
+      "table": "op_order_bill",
+      "columns": [
+        {
+          "key": "serviceOrder",
+          "label": "Service Order",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_serviceOrder"
+        },
+        {
+          "key": "activationDate",
+          "label": "Activation Date",
+          "type": "date",
+          "required": true,
+          "dbKey": "data_activationDate"
+        },
+        {
+          "key": "billingStatus",
+          "label": "Billing Status",
+          "type": "select",
+          "required": true,
+          "options": [
+            "Not billed",
+            "Late",
+            "Incorrect",
+            "Correct"
+          ],
+          "dbKey": "data_billingStatus"
+        },
+        {
+          "key": "monthlyCharge",
+          "label": "Monthly Charge",
+          "type": "currency",
+          "required": false,
+          "dbKey": "data_monthlyCharge"
+        }
+      ]
+    },
+    {
+      "id": "discount",
+      "title": "Discount Leakage Review Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for discount leakage review.",
+      "table": "op_discount",
+      "columns": [
+        {
+          "key": "account",
+          "label": "Account",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_account"
+        },
+        {
+          "key": "discount",
+          "label": "Discount",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_discount"
+        },
+        {
+          "key": "discountValue",
+          "label": "Discount Value",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_discountValue"
+        },
+        {
+          "key": "issue",
+          "label": "Observed Issue",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_issue"
+        }
+      ]
+    },
+    {
+      "id": "collections",
+      "title": "Unbilled and Aged Revenue Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for unbilled and aged revenue.",
+      "table": "op_collections",
+      "columns": [
+        {
+          "key": "account",
+          "label": "Account",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_account"
+        },
+        {
+          "key": "revenueType",
+          "label": "Revenue Type",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_revenueType"
+        },
+        {
+          "key": "amount",
+          "label": "Amount",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_amount"
+        },
+        {
+          "key": "agingBucket",
+          "label": "Aging Bucket",
+          "type": "select",
+          "required": false,
+          "options": [
+            "Current",
+            "31-60",
+            "61-90",
+            "90+"
+          ],
+          "dbKey": "data_agingBucket"
+        }
+      ]
+    },
+    {
+      "id": "leakage",
+      "title": "Leakage Recovery Case Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for leakage recovery case.",
+      "table": "op_leakage",
+      "columns": [
+        {
+          "key": "caseId",
+          "label": "Case ID",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_caseId"
+        },
+        {
+          "key": "leakageType",
+          "label": "Leakage Type",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_leakageType"
+        },
+        {
+          "key": "estimatedValue",
+          "label": "Estimated Value",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_estimatedValue"
+        },
+        {
+          "key": "rootCause",
+          "label": "Root Cause",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_rootCause"
+        }
+      ]
+    },
+    {
+      "id": "product-catalog",
+      "title": "Subscriber Product Catalog",
+      "description": "Products, tariffs, recurring charges, usage units, and effective dates.",
+      "table": "op_product_catalog",
+      "columns": [
+        {
+          "key": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_product"
+        },
+        {
+          "key": "tariff",
+          "label": "Tariff",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_tariff"
+        },
+        {
+          "key": "monthlyCharge",
+          "label": "Monthly Charge",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_monthlyCharge"
+        },
+        {
+          "key": "effectiveDate",
+          "label": "Effective Date",
+          "type": "date",
+          "required": true,
+          "dbKey": "data_effectiveDate"
+        }
+      ]
+    },
+    {
+      "id": "network-elements",
+      "title": "Network Element Registry",
+      "description": "Switches, gateways, mediation feeds, regions, and event ownership.",
+      "table": "op_network_elements",
+      "columns": [
+        {
+          "key": "element",
+          "label": "Network Element",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_element"
+        },
+        {
+          "key": "elementType",
+          "label": "Element Type",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_elementType"
+        },
+        {
+          "key": "region",
+          "label": "Region",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_region"
+        },
+        {
+          "key": "mediationFeed",
+          "label": "Mediation Feed",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_mediationFeed"
+        }
+      ]
+    },
+    {
+      "id": "partner-registry",
+      "title": "Carrier and Roaming Partner Registry",
+      "description": "Partners, agreements, currencies, settlement cycles, and contacts.",
+      "table": "op_partner_registry",
+      "columns": [
+        {
+          "key": "partner",
+          "label": "Partner",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_partner"
+        },
+        {
+          "key": "agreement",
+          "label": "Agreement",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_agreement"
+        },
+        {
+          "key": "currency",
+          "label": "Currency",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_currency"
+        },
+        {
+          "key": "settlementCycle",
+          "label": "Settlement Cycle",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_settlementCycle"
+        }
+      ]
+    },
+    {
+      "id": "rating-rules",
+      "title": "Rating Rule Library",
+      "description": "Tariff rules, event types, units, rates, rounding, and effective periods.",
+      "table": "op_rating_rules",
+      "columns": [
+        {
+          "key": "ruleId",
+          "label": "Rule ID",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_ruleId"
+        },
+        {
+          "key": "eventType",
+          "label": "Event Type",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_eventType"
+        },
+        {
+          "key": "unitRate",
+          "label": "Unit Rate",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_unitRate"
+        },
+        {
+          "key": "effectiveDate",
+          "label": "Effective Date",
+          "type": "date",
+          "required": true,
+          "dbKey": "data_effectiveDate"
+        }
+      ]
+    }
+  ],
+  "domainProduct": {
+    "home": "Telecom Revenue Assurance Control",
+    "context": "CDR completeness, mediation, rating, roaming settlement, subscription leakage, and revenue recovery.",
+    "features": [
+      {
+        "id": "cdr-reconciliation",
+        "title": "Network-to-Bill CDR Reconciliation",
+        "description": "Reconcile event counts and values from network element through mediation, rating, billing, and general ledger.",
+        "view": "reconciliation",
+        "modules": [
+          "cdr",
+          "network-elements"
+        ],
+        "actions": [
+          {
+            "id": "accept-balance",
+            "label": "Accept Balanced CDR Batch",
+            "nextStatus": "Approved",
+            "auditDetail": "Accepted end-to-end CDR population and value reconciliation."
+          },
+          {
+            "id": "open-leakage",
+            "label": "Open Leakage Investigation",
+            "nextStatus": "Investigating",
+            "auditDetail": "Opened an event-loss or value-leakage investigation."
+          }
+        ]
+      },
+      {
+        "id": "mediation-control",
+        "title": "Mediation Completeness Control",
+        "description": "Monitor sequence gaps, duplicates, rejects, late files, transformations, and rerating across mediation feeds.",
+        "view": "control",
+        "modules": [
+          "leakage",
+          "network-elements"
+        ],
+        "actions": [
+          {
+            "id": "reprocess-batch",
+            "label": "Authorize Batch Reprocessing",
+            "nextStatus": "Review",
+            "auditDetail": "Authorized controlled mediation batch reprocessing."
+          },
+          {
+            "id": "close-sequence-gap",
+            "label": "Close Sequence Gap",
+            "nextStatus": "Approved",
+            "auditDetail": "Closed sequence gap after source and downstream count validation."
+          }
+        ]
+      },
+      {
+        "id": "rating-assurance",
+        "title": "Rating & Tariff Assurance",
+        "description": "Compare billed charges against effective tariff, event type, unit, rounding, discount, and tax rules.",
+        "view": "reconciliation",
+        "modules": [
+          "rating",
+          "rating-rules"
+        ],
+        "actions": [
+          {
+            "id": "approve-rerate",
+            "label": "Approve Customer Rerating",
+            "nextStatus": "Review",
+            "auditDetail": "Approved rerating for confirmed tariff or rating variance."
+          },
+          {
+            "id": "validate-charge",
+            "label": "Validate Rated Charge",
+            "nextStatus": "Approved",
+            "auditDetail": "Validated charge against the effective rating rule."
+          }
+        ]
+      },
+      {
+        "id": "roaming-settlement",
+        "title": "Roaming Settlement Reconciliation",
+        "description": "Reconcile TAP/RAP files, partner rates, currencies, rejected events, disputes, and settlement balances.",
+        "view": "deadline",
+        "modules": [
+          "roaming",
+          "partner-registry"
+        ],
+        "actions": [
+          {
+            "id": "open-partner-dispute",
+            "label": "Open Partner Dispute",
+            "nextStatus": "Investigating",
+            "auditDetail": "Opened partner settlement dispute with event-level support."
+          },
+          {
+            "id": "approve-settlement",
+            "label": "Approve Settlement",
+            "nextStatus": "Approved",
+            "auditDetail": "Approved reconciled roaming settlement balance."
+          }
+        ]
+      },
+      {
+        "id": "subscription-leakage",
+        "title": "Subscription & Provisioning Leakage",
+        "description": "Detect active service without billing, billed service without provisioning, orphan discounts, and delayed disconnects.",
+        "view": "control",
+        "modules": [
+          "order-bill",
+          "product-catalog"
+        ],
+        "actions": [
+          {
+            "id": "start-billing",
+            "label": "Start Missing Billing",
+            "nextStatus": "Review",
+            "auditDetail": "Initiated billing correction for active unbilled service."
+          },
+          {
+            "id": "disconnect-orphan",
+            "label": "Disconnect Orphan Service",
+            "nextStatus": "Approved",
+            "auditDetail": "Authorized correction of orphan provisioned service."
+          }
+        ]
+      }
+    ]
+  },
+  "integrations": [
+    {
+      "id": "integration-1",
+      "name": "Network mediation",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-2",
+      "name": "Billing engine",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-3",
+      "name": "Order management",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-4",
+      "name": "Roaming clearinghouse",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-5",
+      "name": "General ledger",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    }
+  ],
+  "featureCount": 40,
+  "seededRecords": 300,
+  "demoUsers": 3,
+  "apiPort": 5517,
+  "dbName": "profit_ai_telecom_revenue_assurance_cdr_reconciliation"
+}
